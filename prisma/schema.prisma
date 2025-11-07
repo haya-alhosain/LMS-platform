@@ -28,8 +28,8 @@ model Course {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([categoryId])
-  @@fulltext([title])
+  @@index([categoryId]) //لتحسين سرعة البحث
+  @@fulltext([title]) //للبحث النصي.
 }
 
 model Category {
@@ -43,9 +43,9 @@ model Attachment {
   name String
   url  String @db.Text
 
-  courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  //onDelete: Cascade → لو تم حذف الدورة، تُحذف المرفقات التابعة لها تلقائيًا.
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
